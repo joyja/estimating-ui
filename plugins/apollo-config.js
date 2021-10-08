@@ -27,6 +27,7 @@ export default function (context) {
     }
   }
   const portString = config.port ? `:${config.port}` : ``
+  console.log(`${config.httpPrefix}://${config.hostname}${portString}${config.url}`)
   return {
     httpEndpoint: `${config.httpPrefix}://${config.hostname}${portString}${config.url}`,
     wsEndpoint: `${config.wsPrefix}://${config.hostname}${portString}${config.url}`,
