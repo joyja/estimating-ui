@@ -1,4 +1,14 @@
 export default {
+  env: {
+    estimatingServerSecure: process.env.ESTIMATING_SERVER_SECURE || false,
+    estimatingServerHost: process.env.ESTIMATING_SERVER_HOST,
+    estimatingServerPort: process.env.ESTIMATING_SERVER_PORT || 4000,
+    estimatingServerUrl: process.env.ESTIMATING_SERVER_URL,
+    estimatingClientSecure: process.env.ESTIMATING_CLIENT_SECURE || false,
+    estimatingClientHost: process.env.ESTIMATING_CLIENT_HOST,
+    estimatingClientPort: process.env.ESTIMATING_CLIENT_PORT,
+    estimatingClientUrl: process.env.ESTIMATING_CLIENT_URL,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'estimating-ui',
@@ -35,9 +45,22 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/apollo'
   ],
+
+  // Apollo module configuration
+  apollo: {
+    clientConfigs: {
+      default: '~/plugins/apollo-config.js',
+    },
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend: function (config, {isDev, isClient}) {
+      config.node = {
+          fs: "empty"
+      };
+    }
   }
 }

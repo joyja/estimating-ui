@@ -4,10 +4,11 @@ const fetch = require('node-fetch')
 const prefix = process.env.ESTIMATING_SERVER_SECURE ? 'https' : 'http'
 const hostname = process.env.ESTIMATING_SERVER_HOST || 'localhost'
 const port = process.env.ESTIMATING_SERVER_PORT || 4000
-const url = `${prefix}://${hostname}:${port}/`
+const url = process.env.ESTIMATING_SERVER_URL || '/graphql'
+const endpoint = `${prefix}://${hostname}:${port}${url}`
 
 const getSchema = function () {
-  return fetch(url, {
+  return fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
